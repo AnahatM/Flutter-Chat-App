@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:minimalist_chat/components/custom_button.dart';
 import 'package:minimalist_chat/components/custom_text_field.dart';
 
-class LoginPage extends StatelessWidget {
-  // Login Text Controllers
+class RegisterPage extends StatelessWidget {
+  // Registration Text Controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
-  // Tap to go to register page
-  final void Function()? onRegisterTap;
+  // Tap to go to login page
+  final void Function()? onLoginTap;
 
-  LoginPage({super.key, required this.onRegisterTap});
+  RegisterPage({super.key, required this.onLoginTap});
 
-  // Method to Handle Login Button Press
-  void login() {
+  // Method to Handle Register Button Press
+  void register() {
     // Get the email and password from the input text controllers
     final String email = _emailController.text;
     final String password = _passwordController.text;
@@ -41,7 +43,7 @@ class LoginPage extends StatelessWidget {
 
             // Welcome Back Message
             Text(
-              "Welcome Back, you've been missed!",
+              "Welcome! Register to get started.",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 20,
@@ -50,36 +52,48 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 50),
 
-            // Email and Password Input
+            // Email Input Text Field
             CustomTextfield(hintText: "Email", controller: _emailController),
+
             const SizedBox(height: 10),
+
+            // Password Text Field
             CustomTextfield(
               hintText: "Password",
               controller: _passwordController,
               obscureText: true,
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
 
-            // Login Button
-            CustomButton(buttonText: "Login", onTap: login),
+            // Confirm Password Text Field
+            CustomTextfield(
+              hintText: "Confirm Password",
+              controller: _confirmPasswordController,
+              obscureText: true,
+            ),
 
             const SizedBox(height: 25),
 
             // Register Button
+            CustomButton(buttonText: "Register", onTap: register),
+
+            const SizedBox(height: 25),
+
+            // Login Button
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Not a member? ",
+                  "Already have an account? ",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 GestureDetector(
-                  onTap: onRegisterTap,
+                  onTap: onLoginTap,
                   child: Text(
-                    "Register now",
+                    "Login now",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
