@@ -16,11 +16,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text(
-          "Messages",
-          style: TextStyle(color: Theme.of(context).colorScheme.primary),
-        ),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+        title: Text("Messages"),
+        elevation: 0,
       ),
       drawer: const CustomDrawer(),
       body: _buildUserList(),
@@ -44,7 +43,11 @@ class HomePage extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatPage(receiverEmail: userData["email"]),
+            builder:
+                (context) => ChatPage(
+                  receiverEmail: userData["email"],
+                  receiverID: userData["uid"],
+                ),
           ),
         );
       },

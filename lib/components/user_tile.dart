@@ -20,13 +20,17 @@ class UserTile extends StatelessWidget {
         child: Row(
           children: [
             // Icon
-            Icon(Icons.person),
-
+            Icon(Icons.person, color: Theme.of(context).colorScheme.primary),
             // Spacer
             const SizedBox(width: 16),
-
             // User Name
-            Text(text),
+            Text(
+              text,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 16.0,
+              ),
+            ),
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,7 +28,7 @@ class CustomDrawer extends StatelessWidget {
                 height: 200,
                 margin: EdgeInsets.only(top: 64.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 child: Center(
                   child: Icon(
