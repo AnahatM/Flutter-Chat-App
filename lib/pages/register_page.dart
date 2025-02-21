@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minimalist_chat/auth/auth_service.dart';
 import 'package:minimalist_chat/components/custom_button.dart';
 import 'package:minimalist_chat/components/custom_text_field.dart';
 
@@ -15,13 +16,55 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, required this.onLoginTap});
 
   // Method to Handle Register Button Press
-  void register() {
+  void register(BuildContext context) async {
+    // Get Auth Service
+    final authService = AuthService();
+
+    // Check if Passwords Match
+    if (_passwordController.text != _confirmPasswordController.text) {
+      showDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: Text("Error"),
+              content: Text("Passwords do not match."),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Confirm"),
+                ),
+              ],
+            ),
+      );
+      return;
+    }
+
     // Get the email and password from the input text controllers
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    print("Email: $email");
-    print("Password: $password");
+    // Try Register
+    try {
+      await authService.signUpWithEmailAndPassword(email, password);
+    }
+    // Catch Any Errors
+    catch (e) {
+      if (!context.mounted) return;
+      showDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: Text("Error"),
+              content: Text(e.toString()),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Confirm"),
+                ),
+              ],
+            ),
+      );
+    }
   }
 
   @override
@@ -76,7 +119,10 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 25),
 
             // Register Button
-            CustomButton(buttonText: "Register", onTap: register),
+            CustomButton(
+              buttonText: "Register",
+              onTap: () => register(context),
+            ),
 
             const SizedBox(height: 25),
 
