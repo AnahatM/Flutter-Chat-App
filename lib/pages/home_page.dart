@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text("Messages"),
+        title: Text(
+          "Messages",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
       drawer: CustomDrawer(),
     );

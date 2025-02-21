@@ -1,6 +1,6 @@
 # Minimalist Chat App
 
-A minimalist chat app made with Flutter and Firebase.
+A minimalist chat app made with Flutter and Firebase. Firebase is used for authentication, and Firestore database is used for storing messages.
 
 ## Flutter Resources
 
