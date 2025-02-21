@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:minimalist_chat/components/custom_drawer.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text("Messages"),
+        title: Text("Settings"),
       ),
-      drawer: CustomDrawer(),
     );
   }
 }
