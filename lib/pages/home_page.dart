@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:minimalist_chat/components/custom_drawer.dart';
+import 'package:minimalist_chat/components/user_tile.dart';
+import 'package:minimalist_chat/pages/chat_page.dart';
+import 'package:minimalist_chat/services/auth/auth_service.dart';
+import 'package:minimalist_chat/services/chat/chat_service.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  // Chat and Auth services
+  final ChatService _chatService = ChatService();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +22,64 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
+      body: _buildUserList(),
+    );
+  }
+
+  // Build Individual List Tiles for Users
+  Widget _buildUserListItem(
+    Map<String, dynamic> userData,
+    BuildContext context,
+  ) {
+    // Check if current user, display nothing
+    if (userData["email"] == _authService.getCurrentUser()!.email) {
+      return Container();
+    }
+    // Display All Users Except Current User
+    return UserTile(
+      text: userData["email"],
+      onTap: () {
+        // Tapped on a user, go to chat screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatPage(receiverEmail: userData["email"]),
+          ),
+        );
+      },
+    );
+  }
+
+  // Build User List
+  Widget _buildUserList() {
+    return StreamBuilder(
+      stream: _chatService.getUsersStream(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Center(child: Text("Error: ${snapshot.error}"));
+        }
+
+        // Loading
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Column(
+              children: [CircularProgressIndicator(), Text("Loading Chats...")],
+            ),
+          );
+        }
+
+        // Return List View
+        return ListView(
+          children:
+              snapshot.data!
+                  .map<Widget>(
+                    (userData) => _buildUserListItem(userData, context),
+                  )
+                  .toList(),
+        );
+      },
     );
   }
 }
