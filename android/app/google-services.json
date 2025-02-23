@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822860341232",
+    "project_id": "flutter-minimalist-chat-app",
+    "storage_bucket": "flutter-minimalist-chat-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822860341232:android:bee6328e3d0d5f6b870735",
+        "android_client_info": {
+          "package_name": "com.example.minimalist_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvBNXaB_LWZ5fQzXHuJN5171s-TzYQ3EQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
