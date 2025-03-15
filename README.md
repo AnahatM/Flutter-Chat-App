@@ -3,6 +3,9 @@
 A minimalist chat app made with Flutter and Firebase. Firebase is used for authentication, and Firestore database is used for storing messages.
 The app features modern UI with the ability to switch between light and dark mode.
 
+![Flutter](https://img.shields.io/badge/-Flutter-05122A?style=flat-square&logo=Flutter&color=2a2e34) 
+![Dart](https://img.shields.io/badge/-Dart-05122A?style=flat-square&logo=Dart&color=2a2e34)
+
 ## Screenshots
 
 <img src="./images/ChatAppMockup.png" alt="Main App" width="500"/>
